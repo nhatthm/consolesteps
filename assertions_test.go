@@ -3,7 +3,7 @@ package consolesteps
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestTestingT_LastError(t *testing.T) {
@@ -12,5 +12,5 @@ func TestTestingT_LastError(t *testing.T) {
 	tee := teeError()
 	tee.Errorf("error: %s", "unknown")
 
-	assert.EqualError(t, tee.LastError(), `error: unknown`)
+	require.EqualError(t, tee.LastError(), `error: unknown`)
 }
