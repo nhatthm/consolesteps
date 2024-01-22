@@ -9,8 +9,8 @@ type writer struct {
 	console *expect.Console
 }
 
-func (w *writer) registerContext(ctx *godog.ScenarioContext) {
-	ctx.Step(`write to console:`, func(s *godog.DocString) error {
+func (w *writer) RegisterSteps(s *godog.ScenarioContext) {
+	s.Step(`write to console:`, func(s *godog.DocString) error {
 		_, err := w.console.Write([]byte(s.Content))
 
 		return err

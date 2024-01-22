@@ -50,8 +50,8 @@ func TestIntegration(t *testing.T) {
 	)
 
 	RunSuite(t, "..", func(_ *testing.T, ctx *godog.ScenarioContext) {
-		m.RegisterContext(ctx)
-		w.registerContext(ctx)
+		m.RegisterSteps(ctx)
+		w.RegisterSteps(ctx)
 	})
 }
 

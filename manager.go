@@ -49,21 +49,28 @@ type tHelper interface {
 }
 
 // RegisterContext register console Manager to test context.
-func (m *Manager) RegisterContext(ctx *godog.ScenarioContext) {
-	ctx.Before(func(_ context.Context, sc *godog.Scenario) (context.Context, error) {
+//
+// Deprecated: Use Manager.RegisterSteps instead.
+func (m *Manager) RegisterContext(s *godog.ScenarioContext) {
+	m.RegisterSteps(s)
+}
+
+// RegisterSteps register console Manager to test context.
+func (m *Manager) RegisterSteps(s *godog.ScenarioContext) {
+	s.Before(func(_ context.Context, sc *godog.Scenario) (context.Context, error) {
 		m.NewConsole(sc)
 
 		return nil, nil
 	})
 
-	ctx.After(func(_ context.Context, sc *godog.Scenario, _ error) (context.Context, error) {
+	s.After(func(_ context.Context, sc *godog.Scenario, _ error) (context.Context, error) {
 		m.CloseConsole(sc)
 
 		return nil, nil
 	})
 
-	ctx.Step(`console output is:`, m.isConsoleOutput)
-	ctx.Step(`console output matches:`, m.matchConsoleOutput)
+	s.Step(`console output is:`, m.isConsoleOutput)
+	s.Step(`console output matches:`, m.matchConsoleOutput)
 }
 
 func (m *Manager) session() *session {
