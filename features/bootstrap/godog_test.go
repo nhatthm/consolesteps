@@ -12,6 +12,7 @@ import (
 
 	"github.com/cucumber/godog"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"go.nhat.io/consolesteps"
 )
@@ -66,7 +67,7 @@ func RunSuite(t *testing.T, path string, featureContext func(t *testing.T, ctx *
 	var paths []string
 
 	files, err := os.ReadDir(filepath.Clean(path))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	paths = make([]string, 0, len(files))
 
